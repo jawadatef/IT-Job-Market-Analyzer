@@ -1,5 +1,6 @@
 from pathlib import Path
-import sys
+import sys 
+import os
 
 import pandas as pd
 import streamlit as st
@@ -77,7 +78,7 @@ def find_jobs_by_title(_question):
 
 if submitted:
     if question.strip():
-        api_key = dotenv_values(project_root / ".env").get("GEMINI_API_KEY")
+        api_key = os.getenv("GEMINI_API_KEY") or dotenv_values(project_root / ".env").get("GEMINI_API_KEY")
         with st.spinner("جاري قراءة الإعلانات..."):
             answer, sources = answer_job_question(
                 question.strip(), find_jobs_by_title, api_key
